@@ -1,4 +1,4 @@
-# PP_TP1_53359
+# PP_TP2_53359
 # Trabajo Práctico 2 - Paradigmas de Programación
 
 **UTN - Facultad Regional Mendoza**
