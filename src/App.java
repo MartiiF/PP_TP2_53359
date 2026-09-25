@@ -41,7 +41,7 @@ class App {
         } while (continuar.equals("s"));
 
         //declaro datos de evento
-        String id;
+//        String id;
         String titulo;
         double costoBase;
         boolean gratuito;
@@ -57,6 +57,7 @@ class App {
         int tipo;
         String disertante = "";
         boolean requiereNotebook = false;
+        int nivel = -1;
 
         //creamos eventos
         do {
@@ -99,15 +100,18 @@ class App {
             do {
                 do {
                     System.out.println("Ingrese el tipo de actividad (1 o 2)");
-                    System.out.println("1. modelo.actividades.Charla");
-                    System.out.println("2. modelo.actividades.Taller");
+                    System.out.println("1. Charla");
+                    System.out.println("2. Taller");
+                    System.out.println("3. Curso");
                     tipo = scanner.nextInt();
                     scanner.nextLine();
 
                     if (tipo == 1 ) {
-                        tipoActividad = "modelo.actividades.Charla";
+                        tipoActividad = "Charla";
                     } else if (tipo == 2) {
-                        tipoActividad = "modelo.actividades.Taller";
+                        tipoActividad = "Taller";
+                    } else if (tipo == 3) {
+                        tipoActividad = "Curso";
                     } else {
                         System.out.println("Entrada no válida");
                         System.out.println("Ingrese un número de actividad válido");
@@ -116,20 +120,32 @@ class App {
 
                 } while (tipo != 1 && tipo != 2);
 
-                if (tipoActividad.equalsIgnoreCase("modelo.actividades.Charla")) {
-                    do {
-                        System.out.println("Ingrese el nombre del disertante: ");
-                        disertante = scanner.nextLine();
-                    } while (disertante == null || disertante.isEmpty());
+                switch (tipoActividad.trim().toLowerCase()) {
+                    case "charla":
+                        do {
+                            System.out.println("Ingrese el nombre del disertante: ");
+                            disertante = scanner.nextLine();
+                        } while (disertante == null || disertante.isEmpty());
+                        break;
+                    case "taller":
+                        String respuesta;
+                        do {
+                            System.out.println("¿La actividad requiere notebook?(s/n)");
+                            respuesta = scanner.nextLine().trim().toLowerCase();
+                        } while (!respuesta.equals("s") && !respuesta.equals("n"));
 
-                } else  {
-                    String respuesta;
-                    do {
-                        System.out.println("¿La actividd requiere notebook?(s/n)");
-                        respuesta = scanner.nextLine().trim().toLowerCase();
-                    } while (!respuesta.equals("s") && !respuesta.equals("n"));
-
-                    requiereNotebook = respuesta.equals("s");
+                        requiereNotebook = respuesta.equals("s");
+                        break;
+                    case "curso":
+                        do {
+                            System.out.println("Ingrese el nivel del curso");
+                            nivel = scanner.nextInt();
+                            scanner.nextLine();
+                        } while (nivel < 0 );
+                        break;
+                    default:
+                        System.out.println("Tipo de actividad no válida");
+                        break;
                 }
 
                 do {
@@ -157,7 +173,7 @@ class App {
                     scanner.nextLine();
                 } while (CUPO_MINIMO < 0);
 
-                evento.crearActividad(idActividad, tituloActividad, cupoMaximo, CUPO_MINIMO, tipoActividad, disertante, requiereNotebook);
+                evento.crearActividad(idActividad, tituloActividad, cupoMaximo, CUPO_MINIMO, tipoActividad, disertante, requiereNotebook, nivel);
                 Actividad actividad =  evento.getActividades().get(evento.getActividades().size() - 1);
 
                 System.out.println("INSCRIPCIÓN DE ESTUDIANTES A LA ACTIVIDAD " + tituloActividad);
@@ -171,7 +187,7 @@ class App {
                             if (actividad.getInscripciones().size() < cupoMaximo ) {
                                 try {
                                     actividad.inscribir(estudiante);
-                                    System.out.println("modelo.Estudiante inscripto correctamente");
+                                    System.out.println("Estudiante inscripto correctamente");
                                 } catch (CupoExcedidoException e) {
                                      System.out.println("Error al inscribir: " + e.getMessage());
                                 }

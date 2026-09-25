@@ -1,6 +1,11 @@
 package modelo.actividades;
 
-public class Taller extends Actividad {
+import modelo.Estudiante;
+import modelo.certificacion.Certificable;
+
+import java.time.LocalDate;
+
+public class Taller extends Actividad implements Certificable {
     private boolean requiereNotebook;
 
     public Taller (int id, String titulo, int cupoMaximo, int CUPO_MINIMO, boolean requiereNotebook) {
@@ -18,7 +23,7 @@ public class Taller extends Actividad {
 
     @Override
     public String getTipo() {
-        return "modelo.actividades.Taller";
+        return this.getClass().getSimpleName();
     }
 
     @Override
@@ -30,4 +35,8 @@ public class Taller extends Actividad {
         }
     }
 
+    @Override
+    public String generarCertificado(Estudiante estudiante) {
+        return "Se certifica que " + estudiante.getNombre() + " participó en un taller el día " + LocalDate.now() + ".";
+    }
 }

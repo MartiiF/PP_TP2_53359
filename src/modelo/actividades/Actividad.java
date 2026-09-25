@@ -4,11 +4,12 @@ import excepciones.CupoExcedidoException;
 import modelo.Estudiante;
 import modelo.Inscripcion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
-public abstract class Actividad {
+public abstract class Actividad implements Serializable {
     private int id;
     private String titulo;
     private int cupoMaximo;
@@ -20,7 +21,6 @@ public abstract class Actividad {
         setTitulo(titulo);
         setCupoMaximo(cupoMaximo);
         this.CUPO_MINIMO = CUPO_MINIMO;
-       // inscripciones.add()
     }
 
 
