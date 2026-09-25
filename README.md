@@ -100,9 +100,9 @@ Este archivo corresponde a la persistencia del evento mediante serialización de
 objetos.
 
 ## Requisitos
-- Java JDK 21
-- IntelliJ IDEA
-- Clonar el repositorio
+- Java JDK 17 o posterior.
+- IntelliJ IDEA.
+- Clonar el repositorio.
 
 ## Clonar el repositorio
 Para clonar el repositorio mediante HTTPS:
