@@ -55,6 +55,7 @@ En IntelliJ IDEA:
 - Los resultados de los ejercicios se mostrarán por consola.
 
 ## Estructura
+```text
 PP_TP2_53359/
 │
 ├── src/
@@ -84,6 +85,7 @@ PP_TP2_53359/
 │
 ├── .gitignore
 └── README.md
+```
 
 La carpeta imagenes contiene las capturas de la salida por consola obtenidas
 durante la ejecución del programa.
